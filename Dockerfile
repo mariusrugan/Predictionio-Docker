@@ -18,13 +18,13 @@ RUN apk add --update curl \
   && rm -rf /var/cache/apk/*
 #First get Predictionio
 RUN curl -O http://mirror.nexcess.net/apache/incubator/predictionio/${PIO_VERSION}-incubating/apache-predictionio-${PIO_VERSION}-incubating.tar.gz \
-    && tar -xvzf apache-predictionio-${PIO_VERSION}-incubating.tar.gz -C /predictionio-${PIO_VERSION} \
+    && tar -xvzf apache-predictionio-${PIO_VERSION}-incubating.tar.gz -C predictionio-${PIO_VERSION} \
     && rm apache-predictionio-${PIO_VERSION}-incubating.tar.gz \
     && cd predictionio-${PIO_VERSION} \
     && ./make-distribution.sh
 #Then build and extract
-RUN tar zxvf /predictionio-${PIO_VERSION}/PredictionIO-${PIO_VERSION}-incubating.tar.gz -C ${PIO_HOME} /
-RUN rm -r /predictionio-${PIO_VERSION}
+RUN tar zxvf predictionio-${PIO_VERSION}/PredictionIO-${PIO_VERSION}-incubating.tar.gz -C ${PIO_HOME} /
+RUN rm -r predictionio-${PIO_VERSION}
 RUN mkdir /${PIO_HOME}/vendors
 COPY files/pio-env.sh ${PIO_HOME}/conf/pio-env.sh
 #Spark is next, has hadoop 2.7
